@@ -5,7 +5,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
 
     const { _id, name, quantity, supplier, taste, category, details, photo } = coffee;
 
@@ -28,11 +28,13 @@ const CoffeeCard = ({ coffee }) => {
                     .then(data => {
                         console.log(data)
                         if (data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            })
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                            const remaining = coffees.filter(cof => cof._id !==_id);
+                            setCoffees(remaining);
                         }
                     })
             }
@@ -68,7 +70,7 @@ const CoffeeCard = ({ coffee }) => {
             <div className='w-.1/3 space-y-3 justify-end'>
                 <button className='w-[40px] h-[40px] bg-[#D2B48C] text-[35px] text-center text-white content-center pl-[2px] rounded-sm'><GrFormView /></button>
 
-                <Link to={`updateoffee/${_id}`}>
+                <Link to={`updatecoffee/${_id}`}>
                     <button className='w-[40px] h-[40px] bg-[#3C393B] items-center text-[25px] text-white content-center pl-2 rounded-sm'><VscEdit /></button>
                 </Link>
 

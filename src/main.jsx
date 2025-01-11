@@ -7,8 +7,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import AddCoffee from './components/AddCoffee.jsx';
-import UpdateCoffee from './components/UpdateCoffee.jsx';
 import Home from './components/home/Home.jsx';
+import UpdateCoffee from './components/UpdateCoffee.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -22,11 +23,11 @@ const router = createBrowserRouter([
         loader: () => fetch('http://localhost:5000/coffee')
       },
       {
-        path: "addcoffee",
+        path: '/addcoffee',
           element: <AddCoffee></AddCoffee>
       },
       {
-        path: 'updateoffee/:id',
+        path: '/updatecoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>,
         loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
       }
@@ -38,4 +39,4 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-)      
+);
